@@ -1,0 +1,319 @@
+<table>
+  <TR>
+    <TD>Level:</TD>
+    <TD><input type="number" value="1" min="1" name="attr_CharLevel" /></TD>
+    <input type="hidden" name="attr_CharLevelAdvancements" value="(@{CharLevel}-1)" disabled />
+  </TR>
+<div><h3>Main Derived Stats:</h3></div>
+<table>
+  <TR>
+    <TD>Hitpoints:</TD>
+    <TD><input type="number" name="attr_Hitpoints" value="15" /></TD>
+    <TD style='text-align: center;'>/</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Hitpoints_max" value="15+(@{Strength}+(2*@{Endurance}))+@{HitpointsMod}" title="15 + Strength + 2 x Endurance" disabled /></TD>
+    <!--value="15+((@{CharLevel}-1)*@{HealthPerLevel})+(@{Strength}+(2*@{Endurance}))+@{HitpointsMod}"-->
+    <TD><input type="number" name="attr_HitpointsMod" value="0" title="Race & Misc modifiers" /></TD>
+  </TR>
+  <TR>
+    <TD>Action Points:</TD>
+    <TD><input type="number" name="attr_AP" value="5" min="0" /></TD>
+    <TD style='text-align: center;'>/</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_AP_max" value="(5+@{Agility}*0.5)" title="AG 1 = 5, 2-3 = 6, 4-5 = 7, 6-7 = 8, 8-9 = 9, 10+ = 10" disabled /></TD>
+    <input type="hidden" disabled name="attr_AP_x" value="10" />
+    <input type="hidden" disabled name="attr_AP_y" value="(5+floor(@{Agility}*0.5))" />
+    <input type="hidden" disabled name="attr_AP_min_xy" value="(((@{AP_x} + @{AP_y}) - abs(@{AP_x} - @{AP_y})) / 2)" />
+  </TR>
+  <TR>
+    <TD>Armor Class:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_AC" value="5+@{armor}" disabled /></TD>
+    <TD style='text-align: center;'>= 5 +</TD>
+    <TD><input type="number" name="attr_armor" value="0"/></TD>
+  </TR>
+</table>
+<div id="divider" style="height: 15px;"/>
+<div><h3>Resistances</h3></div>
+<table>
+  <TR>
+    <TD>Poison:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_PoisonResistance" value="5*@{Endurance}+@{PoisonResistanceMod1}+@{PoisonResistanceMod2}" disabled /></TD>
+    <TD><input type="number" name="attr_PoisonResistanceMod1" value="0" min="0"  title="Race modifiers" /></TD>
+    <TD><input type="number" name="attr_PoisonResistanceMod2" value="0" title="Misc modifiers" /></TD>
+  </TR>
+  <TR>
+    <TD>Radiation:</TD>
+    <TD><input type="text" style="width: 30pt;" name="attr_RadiationResistance" min="1" value="2*@{Endurance}+@{RadiationResistanceMod1}+@{RadiationResistanceMod2}" disabled /></TD>
+    <TD><input type="number" name="attr_RadiationResistanceMod1" value="0" min="0"  title="Race modifiers" /></TD>
+    <TD><input type="number" name="attr_RadiationResistanceMod2" value="0" title="Misc modifiers" /></TD>
+  </TR>
+  <TR>
+    <TD>Gas:</TD>
+    <TD><input type="number" name="attr_GasResistanceInhaled" value="0" min="0" /></TD>
+    <TD><input type="number" name="attr_GasResistanceContact" value="0" min="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Electricity:</TD>
+    <TD><input type="number" name="attr_ElectricityResistance" value="0" min="0" /></TD>
+</table>
+<div id="divider" style="height: 15px;"/>
+<div><h3>Other Stats</h3></div>
+<table>
+  <TR>
+    <TD>Critical Chance:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Critical" value="@{Luck}+@{CriticalMod}" disabled /></TD>
+    <TD><input type="number" name="attr_CriticalMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Damage Resistance:</TD>
+    <TD><input type="number" name="attr_BaseDamageResistance" value="0" min="0" title="Base Damage Resistance" /></TD>
+    <TD><input type="number" name="attr_ModDamageResistance" value="0" title="Damage Resistance Modifier" /></TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_TotalDamageResistance" value="@{BaseDamageResistance}+@{ModDamageResistance}" disabled /></TD>
+  </TR>
+  <TR>
+    <TD>Damage Threshold:</TD>
+    <TD><input type="number" name="attr_DamageThreshold" value="0" min="0" /></TD>
+  <TR>
+    <TD>Carry Weight:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_CarryWeight" value="25+(@{CarryWeightMultiplier}*@{Strength})" title="25 + (25 x Strength)" disabled /></TD>
+    <TD><input type="number" name="attr_CarryWeightMultiplier" value="25" title="Carry Weight Multiplier" /></TD>
+  </TR>
+  <TR>
+    <TD>Melee Damage:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_MeleeDamage" min="1" value="@{AD_max_xy}+@{MeleeDamageMod}" title="STR 1 - 6 = 1, 7 = 2," disabled /></TD>
+    <TD><input type="number" name="attr_MeleeDamageMod" value="0" /></TD>
+    <input type="hidden" disabled="true" name="attr_AD_y" value="1" />
+    <input type="hidden" disabled="true" name="attr_AD_x" value="@{Strength}-5" />
+    <input type="hidden" disabled="true" name="attr_AD_max_xy" value="(((@{AD_x} + @{AD_y}) + abs(@{AD_x} - @{AD_y})) / 2)" />
+  </TR>
+  <TR>
+    <TD>Heal Rate:</TD>
+    <TD><input type="number" name="attr_HealRate" value="1" min="1" /></TD>
+  </TR>
+  <TR>
+    <TD>Sequence:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Sequence" value="(2*@{Perception})+@{SequenceMod}" disabled /></TD>
+    <TD><input type="number" name="attr_SequenceMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Health per Level:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_HealthPerLevel" value="3+floor(@{Endurance}/2)" disabled /></TD>
+  </TR>
+  <TR>
+    <TD>Skill Points per Level:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_SkillPointsPerLevel" value="5+(2*@{Intelligence})" disabled /></TD>
+  </TR>
+</table>
+<div id="divider" style="height: 15px;"/>
+<div><h3>S.P.E.C.I.A.L</h3></div>
+<div>
+  <table>
+    <TR>
+      <TD></TD>
+      <TD>B</TD>
+      <TD>M</TD>
+      <TD>T</TD>
+    </TR>
+    <TR>
+      <TD>Strength:</TD>
+      <TD><input type="number" min="1" name="attr_StrengthBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_StrengthMod" value="0" /></TD>
+      <TD><input type="number" style="width: 34pt;" name="attr_Strength" value="@{StrengthBase}+@{StrengthMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Perception:</TD>
+      <TD><input type="number" min="1" name="attr_PerceptionBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_PerceptionMod" value="0" /></TD>
+      <TD><input type="number" style="width: 34pt;" name="attr_Perception" value="@{PerceptionBase}+@{PerceptionMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Endurance:</TD>
+      <TD><input type="number" min="1" name="attr_EnduranceBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_EnduranceMod" value="0" /></TD>
+      <TD><input type="number" style="width: 34pt;" name="attr_Endurance" value="@{EnduranceBase}+@{EnduranceMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Charisma:</TD>
+      <TD><input type="number" min="1" name="attr_CharismaBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_CharismaMod" value="0" /></TD>
+      <TD><input type="number" name="attr_Charisma" value="@{CharismaBase}+@{CharismaMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Intelligence:</TD>
+      <TD><input type="number" min="1" name="attr_IntelligenceBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_IntelligenceMod" value="0" /></TD>
+      <TD><input type="number" name="attr_Intelligence" value="@{IntelligenceBase}+@{IntelligenceMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Agility:</TD>
+      <TD><input type="number" min="1" name="attr_AgilityBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_AgilityMod" value="0" /></TD>
+      <TD><input type="number" name="attr_Agility" value="@{AgilityBase}+@{AgilityMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Luck:</TD>
+      <TD><input type="number" min="1" name="attr_LuckBase" value="5" /></TD>
+      <TD><input type="number" min="0" name="attr_LuckMod" value="0" /></TD>
+      <TD><input type="number" name="attr_Luck" value="@{LuckBase}+@{LuckMod}" disabled /></TD>
+    </TR>
+    <TR>
+      <TD>Total:</TD>
+      <TD><input type="text" style="width: 35px;" name="attr_totalSpecial" value="@{Strength}+@{Perception}+@{Endurance}+@{Charisma}+@{Intelligence}+@{Agility}+@{Luck}" disabled=true /></TD>
+    </TR>
+  </table>
+</div>
+<br>
+<div><h3>Skills</h3></div>
+<table>
+  <TR>
+    <TD></TD>
+    <TD>%</TD>
+    <TD style='text-align: center; width: 35px;'>Tag</TD>
+    <TD> < Assign Points > </TD>
+    <TD> < Misc Modifiers > </TD>
+  </TR>
+  <TR>
+    <TD>Small Guns:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_SmallGuns" title="5 + 4 x Agility" value="5+(4*@{Agility})+@{SmallGunsTag}+@{SmallGunsMod}+(@{addedSmallGuns}*floor(@{SmallGunsTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_SmallGunsTag" title="Tag Small Guns" value="20" /></TD>
+    <TD><input type="number" name="attr_addedSmallGuns" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_SmallGunsMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Big Guns:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_BigGuns" title="2 x Agility" value="(2*@{Agility})+@{BigGunsTag}+@{BigGunsMod}+(@{addedBigGuns}*floor(@{BigGunsTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_BigGunsTag" title="Tag Big Guns" value="20" /></TD>
+    <TD><input type="number" name="attr_addedBigGuns" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_BigGunsMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Energy Weapons:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_EnergyWeapons" title="2 x Agility" value="(2*@{Agility})+@{EnergyWeaponsTag}+@{EnergyWeaponsMod}+(@{addedEnergyWeapons}*floor(@{EnergyWeaponsTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_EnergyWeaponsTag" title="Tag Energy Weapons" value="20" /></TD>
+    <TD><input type="number" name="attr_addedEnergyWeapons" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_EnergyWeaponsMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Unarmed:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Unarmed" title="30 + 2 x (Agility + Strength)" value="30+(2*(@{Agility}+@{Strength}))+@{UnarmedTag}+@{UnarmedMod}+(@{addedUnarmed}*floor(@{UnarmedTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_UnarmedTag" title="Tag Unarmed" value="20" /></TD>
+    <TD><input type="number" name="attr_addedUnarmed" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_UnarmedMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Melee Weapons:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_MeleeWeapons" title="20 + 2 x (Agility + Strength)" value="20+(2*(@{Agility}+@{Strength}))+@{MeleeWeaponsTag}+@{MeleeWeaponsMod}+(@{addedMeleeWeapons}*floor(@{MeleeWeaponsTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_MeleeWeaponsTag" title="Tag Melee Weapons" value="20" /></TD>
+    <TD><input type="number" name="attr_addedMeleeWeapons" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_MeleeWeaponsMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Throwing:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Throwing" title="4 x Agility" value="(4*@{Agility})+@{ThrowingMod}+@{ThrowingTag}+(@{addedThrowing}*floor(@{ThrowingTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_ThrowingTag" title="Tag Throwing" value="20" /></TD>
+    <TD><input type="number" name="attr_addedThrowing" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_ThrowingMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>First Aid:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_FirstAid" title="2 x (Perception + Endurance)" value="(2*(@{Perception}+@{Endurance}))+@{FirstAidTag}+@{FirstAidMod}+(@{addedFirstAid}*floor(@{FirstAidTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_FirstAidTag" title="Tag First Aid" value="20" /></TD>
+    <TD><input type="number" name="attr_addedFirstAid" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_FirstAidMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Doctor:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Doctor" title="5 + Perception + Endurance" value="5+(@{Perception}+@{Endurance})+@{DoctorTag}+@{DoctorMod}+(@{addedDoctor}*floor(@{DoctorTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_DoctorTag" title="Tag Doctor" value="20" /></TD>
+    <TD><input type="number" name="attr_addedDoctor" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_DoctorMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Sneak:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Sneak" title="5 + 3 x Agility" value="5+(3*@{Agility})+@{SneakTag}+@{SneakMod}+(@{addedSneak}*floor(@{SneakTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_SneakTag" title="Tag Sneak" value="20" /></TD>
+    <TD><input type="number" name="attr_addedSneak" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_SneakMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Lockpick:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Lockpick" title="10 + Perception + Agility" value="10+(@{Perception}+@{Agility})+@{LockpickTag}+@{LockpickMod}+(@{addedLockpick}*floor(@{LockpickTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_LockpickTag" title="Tag Lockpick" value="20" /></TD>
+    <TD><input type="number" name="attr_addedLockpick" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_LockpickMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Steal:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Steal" title="3 x Agility" value="(3*@{Agility})+@{StealTag}+@{StealMod}+(@{addedSteal}*floor(@{StealTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_StealTag" title="Tag Steal" value="20" /></TD>
+    <TD><input type="number" name="attr_addedSteal" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_StealMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Traps:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Traps" title="10 + Perception + Agility" value="10+@{Perception}+@{Agility}+@{TrapsTag}+@{TrapsMod}+(@{addedTraps}*floor(@{TrapsTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_TrapsTag" title="Tag Traps" value="20" /></TD>
+    <TD><input type="number" name="attr_addedTraps" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_TrapsMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Science:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Science" title="4 x Intelligence" value="(4*@{Intelligence})+@{ScienceTag}+@{ScienceMod}+(@{addedScience}*floor(@{ScienceTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_ScienceTag" title="Tag Science" value="20" /></TD>
+    <TD><input type="number" name="attr_addedScience" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_ScienceMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Repair:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Repair" title="3 x Intelligence" value="(3*@{Intelligence})+@{RepairTag}+@{RepairMod}+(@{addedRepair}*floor(@{RepairTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_RepairTag" title="Tag Repair" value="20" /></TD>
+    <TD><input type="number" name="attr_addedRepair" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_RepairMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Pilot:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Pilot" title="2 x (Agility + Perception)" value="(2*(@{Agility}+@{Perception}))+@{PilotTag}+@{PilotMod}+(@{addedPilot}*floor(@{PilotTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_PilotTag" title="Tag Pilot" value="20" /></TD>
+    <TD><input type="number" name="attr_addedPilot" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_PilotMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Speech:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Speech" title="5 x Charisma" value="(5*@{Charisma})+@{SpeechTag}+@{SpeechMod}+(@{addedSpeech}*floor(@{SpeechTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_SpeechTag" title="Tag Speech" value="20" /></TD>
+    <TD><input type="number" name="attr_addedSpeech" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_SpeechMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Barter:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Barter" title="4 x Charisma" value="(4*@{Charisma})+@{BarterTag}+@{BarterMod}+(@{addedBarter}*floor(@{BarterTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_BarterTag" title="Tag Barter" value="20" /></TD>
+    <TD><input type="number" name="attr_addedBarter" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_BarterMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Gambling:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Gambling" title="5 x Luck" value="(5*@{Luck})+@{GamblingTag}+@{GamblingMod}+(@{addedGambling}*floor(@{GamblingTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_GamblingTag" title="Tag Gambling" value="20" /></TD>
+    <TD><input type="number" name="attr_addedGambling" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_GamblingMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Outdoorsman:</TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_Outdoorsman" title="2 x (Endurance + Intelligence)" value="(2*(@{Endurance}+@{Intelligence}))+@{OutdoorsmanTag}+@{OutdoorsmanMod}+(@{addedOutdoorsman}*floor(@{OutdoorsmanTag}/15+1))" disabled="true"/></TD>
+    <TD style='text-align: center;'><input type="checkbox" name="attr_OutdoorsmanTag" title="Tag Outdoorsman" value="20" /></TD>
+    <TD><input type="number" name="attr_addedOutdoorsman" value="0" min="0" step="0.5" /></TD>
+    <TD><input type="number" name="attr_OutdoorsmanMod" value="0" /></TD>
+  </TR>
+  <TR>
+    <TD>Total Skill Points Assigned:</TD>
+    <TD></TD>
+    <TD></TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_TotalSkillPointsAssigned" value="@{addedSmallGuns}+@{addedBigGuns}+@{addedEnergyWeapons}+@{addedUnarmed}+@{addedMeleeWeapons}+@{addedThrowing}+@{addedFirstAid}+@{addedDoctor}+@{addedSneak}+@{addedLockpick}+@{addedSteal}+@{addedTraps}+@{addedScience}+@{addedRepair}+@{addedPilot}+@{addedSpeech}+@{addedBarter}+@{addedGambling}+@{addedOutdoorsman}" disabled /></TD>
+  </TR>
+  <TR>
+    <TD>Total Skill Points Avaliable:</TD>
+    <TD></TD>
+    <TD></TD>
+    <TD><input type="text" style="width: 32pt;" name="attr_TotalSkillPointsAvaliable" value="(@{CharLevel}-1) * @{SkillPointsPerLevel}" disabled /></TD>
+    <TD>This is currently wrong!</TD>
+  </TR>
+</table>
